@@ -1,26 +1,32 @@
 using System;
+using System.IO;
 
-namespace TaskMaster
+class StudentLogger
 {
-    struct TaskPriority
+    /// <summary>
+    /// Appends a student record to a file.
+    /// </summary>
+    /// <param name="filePath">The path to the file.</param>
+    public static void AppendStudentRecord(string filePath)
     {
-        public int Level;
-    }
-
-    class UserTask
-    {
-        public string Name;
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
+        try
         {
-            TaskPriority taskPriority;
-            taskPriority.Level = 1;
+            Console.Write("Enter Student Name: ");
+            string studentName = Console.ReadLine();
 
-            UserTask userTask = new UserTask();
-            userTask.Name = "Sample Task";
+            Console.Write("Enter Student ID: ");
+            string studentId = Console.ReadLine();
+
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine($"{studentName}, {studentId}");
+            }
+
+            Console.WriteLine("Record saved successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occurred: {ex.Message}");
         }
     }
 }
