@@ -1,0 +1,39 @@
+using System;
+using System.IO;
+
+class StudentGrades
+{
+    /// <summary>
+    /// Appends a student record to a file.
+    /// </summary>
+    /// <param name="filePath">The path to the file.</param>
+    static void main(string filePath)
+    {
+        try
+        {
+
+        int[] array = new int[10];
+        Random rand = new Random();
+        string filePath = "names.txt";
+
+    // Fill array with random numbers from 1–10
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = rand.Next(50, 100);
+        }
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+
+            {
+                writer.WriteLine($"{studentName}, {studentId}");
+            }
+
+            Console.WriteLine("Record saved successfully.");
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occurred: {ex.Message}");
+        }
+    }
+}
