@@ -1,0 +1,26 @@
+using System;
+
+namespace TaskMaster
+{
+    struct TaskPriority
+    {
+        public int Level;
+    }
+
+    class UserTask
+    {
+        public string Name;
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            TaskPriority taskPriority;
+            taskPriority.Level = 1;
+
+            UserTask userTask = new UserTask();
+            userTask.Name = "Sample Task";
+        }
+    }
+}
