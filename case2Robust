@@ -1,0 +1,58 @@
+case "2":
+    if (fullPath == "")
+    {
+        Console.WriteLine("Please create/select file first!");
+    }
+    else
+    {
+        try
+        {
+            Console.Write("Enter Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Enter Grade: ");
+            string input = Console.ReadLine();
+
+            // Validate grade input
+            if (!int.TryParse(input, out int grade) || grade < 50 || grade > 100)
+            {
+                Console.WriteLine("Invalid grade, please enter a number between 50 and 100.");
+            }
+            else
+            {
+                Product p = new Product
+                {
+                    Name = name,
+                    Grade = grade,
+                    CreatedDate = DateTime.Now
+                };
+
+                products.Clear();
+                products.Add(p);
+
+                // Write to file
+                using (StreamWriter writer = new StreamWriter(fullPath, true))
+                {
+                    foreach (var product in products)
+                    {
+                        writer.Write($"\n|Name:{product.Name}    |\n" +
+                                     $"|Grade:{product.Grade}  |\n" +
+                                     $"|CreatedDate:{product.CreatedDate.ToShortDateString()}|\n");
+                    }
+                }
+
+                Console.WriteLine("Saved successfully!");
+            }
+        }
+        catch (System.IO.FileNotFoundException fnfEx)
+        {
+            Console.WriteLine("File not found error:");
+            Console.WriteLine(fnfEx.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while saving the data:");
+            Console.WriteLine(ex.Message);
+        }
+    }
+    break;
